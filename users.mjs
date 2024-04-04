@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcrypt";
 
 import jwt from "jsonwebtoken";
-import { secret } from "./credentials.mjs";
+// import { secret } from "./credentials.mjs";
 const router = express.Router();
 
 import { ObjectId } from "mongodb";

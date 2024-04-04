@@ -1,8 +1,7 @@
 import express from "express";
 import runMongoConnect from "./mongoConnect.mjs";
-import { secret } from "./credentials.mjs";
 import users from "./users.mjs";
-import products from "./products.mjs";
+import categories from "./categories.mjs";
 import { expressjwt as jwt } from "express-jwt";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -21,7 +20,7 @@ app.use(
   })
 );
 app.use("/users", users);
-app.use("/products", products);
+app.use("/categories", categories);
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send(err.message);
