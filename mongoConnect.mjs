@@ -37,6 +37,6 @@ try {
 }
 
 const db = cluster.db("testDb");
-export const productsCollection = db.collection("products");
+export const productsCollection = db.collection("categories");
 export const usersCollection = db.collection("users");
 export default db;
