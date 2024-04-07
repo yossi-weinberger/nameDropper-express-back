@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
   try {
     await categoriesCollection.insertOne(req.body);
 
-    res.send("category created successfully");
+    res.status(201).send("category created successfully");
   } catch (error) {
     res.json({ error: error, status: "Error" });
   }
