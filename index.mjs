@@ -1,5 +1,6 @@
 import express from "express";
 import runMongoConnect from "./mongoConnect.mjs";
+import graph from "./graph.mjs";
 import users from "./users.mjs";
 import categories from "./categories.mjs";
 import { expressjwt as jwt } from "express-jwt";
@@ -21,6 +22,7 @@ app.use(
 );
 app.use("/users", users);
 app.use("/categories", categories);
+app.use("/api/graph", graph);
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send(err.message);
