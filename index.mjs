@@ -1,7 +1,7 @@
 import express from "express";
 import runMongoConnect from "./mongoConnect.mjs";
 import graph from "./graph.mjs";
-import users from "./users.mjs";
+// import users from "./users.mjs";
 import categories from "./categories.mjs";
 import { expressjwt as jwt } from "express-jwt";
 import dotenv from "dotenv";
@@ -20,7 +20,7 @@ app.use(
     path: ["/users/login", "/users/register"],
   })
 );
-app.use("/users", users);
+// app.use("/users", users);
 app.use("/categories", categories);
 app.use("/api/graph", graph);
 app.use((err, req, res, next) => {
