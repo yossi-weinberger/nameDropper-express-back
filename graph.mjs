@@ -48,6 +48,49 @@ router.get("/", async (req, res) => {
 });
 
 export default router;
+
+// import dotenv from "dotenv";
+// dotenv.config();
+// import neo4j from "neo4j-driver";
+// import express from "express";
+
+// const driver = neo4j.driver(
+//   process.env.NEO4J_URL,
+//   neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD)
+// );
+
+// const app = express();
+// const router = express.Router();
+
+// router.get("/", async (req, res) => {
+//   const session = driver.session();
+//   try {
+//     const result = await session.run("MATCH (n)-[r]->(m) RETURN n,r,m");
+//     const nodes = [],
+//       rels = [];
+//     if (Array.isArray(result.records)) {
+//       result.records.forEach((record) => {
+//         nodes.push(...record.get("n", "m").map((node) => node.properties));
+//         rels.push(record.get("r").properties);
+//       });
+//     }
+//     res.json({ nodes, rels });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: "שגיאת שרת פנימית" });
+//   } finally {
+//     await session.close();
+//   }
+// });
+
+// app.use("/api", router);
+
+// const PORT = process.env.PORT || 3001;
+// app.listen(PORT, () => {
+//   console.log(`השרת רץ על הפורט ${PORT}`);
+// });
+
+// import driver from "./neo4jConnect.mjs";
 // import express from "express";
 // const router = express.Router();
 
