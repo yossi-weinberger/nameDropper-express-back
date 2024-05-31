@@ -27,21 +27,33 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const valueId = req.params.id;
-    console.log("Received ID:", valueId);
+    const categoryId = req.params.id;
+    // console.log(req.params.id);
 
-    // Find the value by its _id
-    const value = await valuesCollection.findOne({
-      _id: new ObjectId(valueId),
+    // Find the category by its _id
+    const category = await categoriesCollection.findOne({
+      _id: new ObjectId(categoryId),
     });
 
-    if (!value) {
-      return res.status(404).json({ error: "Value not found" });
+    if (!category) {
+      return res.status(404).json({ error: "Category not found" });
     }
 
-    res.json({ data: value, status: "success" });
+    // Find all values that belong to the specified category
+    const values = await valuesCollection
+      .find({
+        category: { name: category.name },
+      })
+      .toArray();
+
+    // console.log("Category ID:", categoryId);
+    // console.log("Category:", category);
+    // console.log("Category Name:", category.name);
+    // console.log("Values:", values);
+
+    res.json({ data: values, status: "success" });
   } catch (error) {
-    console.error("Error fetching value by ID:", error);
+    console.error("Error fetching values by category ID:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
