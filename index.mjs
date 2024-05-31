@@ -3,6 +3,7 @@ import runMongoConnect from "./mongoConnect.mjs";
 import graph from "./graph.mjs";
 // import users from "./users.mjs";
 import categories from "./categories.mjs";
+import values from "./values.mjs";
 import { expressjwt as jwt } from "express-jwt";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -22,7 +23,9 @@ app.use(
 );
 // app.use("/users", users);
 app.use("/categories", categories);
+app.use("/values", values);
 app.use("/api/graph", graph);
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send(err.message);

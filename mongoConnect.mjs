@@ -22,5 +22,6 @@ try {
 
 const db = cluster.db("testDb");
 export const categoriesCollection = db.collection("categories");
+export const valuesCollection = db.collection("values");
 export const usersCollection = db.collection("users");
 export default db;
