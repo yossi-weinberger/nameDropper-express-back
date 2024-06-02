@@ -25,15 +25,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Get category by id
-router.get("/:id", async (req, res, next) => {
+// Get a single category by name
+router.get("/:name", async (req, res, next) => {
   try {
-    const categoryId = req.params.id;
-    // console.log(req.params.id);
+    const categoryName = req.params.name;
 
-    // Find the category by its _id
+    // Find the category by its name
     const category = await categoriesCollection.findOne({
-      _id: new ObjectId(categoryId),
+      name: categoryName,
     });
 
     if (!category) {
@@ -47,19 +46,36 @@ router.get("/:id", async (req, res, next) => {
       })
       .toArray();
 
-    // console.log("Category ID:", categoryId);
-    // console.log("Category:", category);
-    // console.log("Category Name:", category.name);
-    // console.log("Values:", values);
-
     res.json({ data: values, status: "success" });
   } catch (error) {
-    console.error("Error fetching values by category ID:", error);
+    console.error("Error fetching values by category name:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// Update a category
+//get a value by category name
+router.get("/:categoryName/:valueName", async (req, res, next) => {
+  try {
+    const { categoryName, valueName } = req.params;
+    console.log("Received Category Name:", categoryName);
+    console.log("Received Value Name:", valueName);
+
+    // Find the value within the category by its name
+    const value = await valuesCollection.findOne({
+      "category.name": categoryName,
+      name: valueName,
+    });
+
+    if (!value) {
+      return res.status(404).json({ error: "Value not found" });
+    }
+
+    res.json({ data: value, status: "success" });
+  } catch (error) {
+    console.error("Error fetching value by category and value name:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}); // Update a category
 router.patch("/:id", async (req, res) => {
   const categories = await categoriesCollection.updateOne(
     { _id: new ObjectId(req.params.id) },
